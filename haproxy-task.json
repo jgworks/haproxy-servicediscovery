@@ -1,6 +1,6 @@
 [{
     "name": "haproxy-service",
-    "image": "haproxy",
+    "image": "${IMAGE}",
     "cpu": 1,
     "memory": 1024,
     "links": [],
@@ -8,6 +8,11 @@
       {
         "containerPort": 80,
         "hostPort": 80,
+        "protocol": "tcp"
+      },
+      {
+        "containerPort": 9000,
+        "hostPort": 9000,
         "protocol": "tcp"
       }
     ],

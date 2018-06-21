@@ -90,14 +90,22 @@ resource "aws_ecs_service" "haproxy-service" {
 
 resource "aws_ecs_task_definition" "haproxy-task" {
   family                = "haproxy-service"
-  container_definitions = "${file("haproxy-task.json")}"
+  container_definitions = "${data.template_file.task_definition.rendered}"
+}
+
+data "template_file" "task_definition" {
+  template = "${file("haproxy-task.json")}"
+
+  vars = {
+	IMAGE = "${var.image}"
+  }
 }
 
 resource "aws_ecs_service" "backend-service" {
   name                               = "backend-service"
   cluster                            = "${var.ecs_cluster_name}"
   task_definition                    = "${aws_ecs_task_definition.backend-task.arn}"
-  desired_count                      = "4"
+  desired_count                      = "${var.backend_count}"
   deployment_minimum_healthy_percent = "0"
   deployment_maximum_percent         = "100"
 
