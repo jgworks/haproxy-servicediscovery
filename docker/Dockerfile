@@ -3,6 +3,8 @@ EXPOSE 80/tcp
 EXPOSE 1024/tcp
 EXPOSE 9000/tcp
 
+RUN apk -Uuv add curl bash 
+
 #Standard
 COPY haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg
 COPY run.sh /run.sh
