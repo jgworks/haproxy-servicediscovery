@@ -7,6 +7,29 @@ provider "aws" {
   profile = "default"
 }
 
+resource "aws_security_group" "allow_all" {
+  name        = "haproxy-service-discovery"
+  description = "Allow all inbound traffic"
+  vpc_id      = "${var.vpc_id}"
+
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
+    cidr_blocks     = ["0.0.0.0/0"]
+  }
+  tags {
+    Name = "haproxy-service-discovery"
+  }
+}
+
 resource "aws_service_discovery_private_dns_namespace" "private-service-discovery" {
   name        = "internal.local"
   description = "Private Service Discovery"
@@ -20,7 +43,7 @@ output "private-service-discovery-id" {
 resource "aws_elb" "elb-haproxy" {
   name = "haproxy-service-discovery"
 
-  security_groups             = ["${var.security_groups}"]
+  security_groups             = ["${aws_security_group.allow_all.id}"]
   subnets                     = ["${var.subnets}"]
   internal                    = "true"
   cross_zone_load_balancing   = "true"
