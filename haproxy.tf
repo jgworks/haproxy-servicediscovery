@@ -20,11 +20,12 @@ resource "aws_security_group" "allow_all" {
   }
 
   egress {
-    from_port       = 0
-    to_port         = 0
-    protocol        = "-1"
-    cidr_blocks     = ["0.0.0.0/0"]
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
+
   tags {
     Name = "haproxy-service-discovery"
   }
@@ -43,16 +44,16 @@ output "private-service-discovery-id" {
 resource "aws_elb" "elb-haproxy" {
   name = "haproxy-service-discovery"
 
-  security_groups             = ["${aws_security_group.allow_all.id}"]
-  subnets                     = ["${var.subnets}"]
-  internal                    = "true"
-  cross_zone_load_balancing   = "true"
+  security_groups           = ["${aws_security_group.allow_all.id}"]
+  subnets                   = ["${var.subnets}"]
+  internal                  = "true"
+  cross_zone_load_balancing = "true"
 
   listener {
-    instance_port      = 80
-    instance_protocol  = "tcp"
-    lb_port            = 80
-    lb_protocol        = "tcp"
+    instance_port     = 80
+    instance_protocol = "tcp"
+    lb_port           = 80
+    lb_protocol       = "tcp"
   }
 
   listener {
@@ -97,7 +98,7 @@ data "template_file" "task_definition" {
   template = "${file("haproxy-task.json")}"
 
   vars = {
-	IMAGE = "${var.image}"
+    IMAGE = "${var.image}"
   }
 }
 
