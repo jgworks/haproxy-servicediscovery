@@ -1,0 +1,27 @@
+[{
+    "name": "haproxy-service",
+    "image": "haproxy",
+    "cpu": 1,
+    "memory": 1024,
+    "links": [],
+    "portMappings": [
+      {
+        "containerPort": 80,
+        "hostPort": 80,
+        "protocol": "tcp"
+      }
+    ],
+    "essential": true,
+    "entryPoint": [],
+    "command": [],
+    "environment": [],
+    "mountPoints": [],
+    "volumesFrom": [],
+    "workingDirectory": "/usr/src/app",
+    "ulimits": [],
+    "logConfiguration": {
+      "logDriver": "none"
+    }
+  }
+  ]
+  
