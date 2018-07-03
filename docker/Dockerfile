@@ -3,7 +3,7 @@ EXPOSE 80/tcp
 EXPOSE 1024/tcp
 EXPOSE 9000/tcp
 
-RUN apk -Uuv add curl bash 
+RUN apk -Uuv add curl bash socat drill
 
 #Standard
 COPY haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg
