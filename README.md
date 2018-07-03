@@ -1,7 +1,7 @@
 # AWS Service discovery with HAProxy
 
 ## Clone the repo
-    git clone https://github.com/jworks/haproxy-servicediscovery.git
+    git clone https://github.com/jgworks/haproxy-servicediscovery.git
     
 ## Build the container
     cd docker/
