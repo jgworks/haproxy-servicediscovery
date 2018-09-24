@@ -13,7 +13,7 @@ Use the following information when filling up the form:
 NOTE: ensure your AWS region support this feature...
 
 ## Clone the repo
-    git clone https://github.com/jworks/haproxy-servicediscovery.git
+    git clone https://github.com/jgworks/haproxy-servicediscovery.git
 
 ## Set up docker registry on AWS / ECS
 
